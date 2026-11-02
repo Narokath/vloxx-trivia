@@ -14,6 +14,11 @@ export function createAttempt(name, now=Date.now()) {
 export function validAttempt(a) {
   return a && a.version===VERSION && typeof a.name==='string' && a.name.length<=40 && typeof a.id==='string' && Number.isFinite(a.startedAt) && a.unlockAt===a.startedAt+HOUR && Array.isArray(a.items) && a.items.length===15 && new Set(a.items.map(i=>i.id)).size===15 && a.items.every(i=>QUESTIONS.some(q=>q.id===i.id)&&Array.isArray(i.order)&&[...i.order].sort().join('')==='012'&&(i.answer===null||[0,1,2].includes(i.answer))) && Number.isInteger(a.index)&&a.index>=0&&a.index<15 && (a.completedAt===null || (Number.isFinite(a.completedAt)&&a.items.every(i=>i.answer!==null))) && a.items.every((i,n)=>n<a.index?i.answer!==null:n>a.index?i.answer===null||a.completedAt!==null:true);
 }
+// Old answers must never be interpreted against replacement questions with reused IDs.
+export function upgradeAttempt(a) {
+  if(a?.version!=='2026-11-02.1' || !validAttempt({...a,version:VERSION}))return a;
+  return {...createAttempt(a.name,a.startedAt),bankUpdated:true};
+}
 export function score(a) {return a.items.filter(i=>i.answer===0).length;}
 export function breakdown(a) {return [...new Set(QUESTIONS.map(q=>q.category))].map(category=>{const items=a.items.filter(i=>QUESTIONS.find(q=>q.id===i.id).category===category);return {category,correct:items.filter(i=>i.answer===0).length,total:items.length};});}
 export function answer(a, displayedIndex) {

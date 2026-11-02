@@ -1,0 +1,9 @@
+.openai/
+.sites-checkout*/
+.env
+.env.*
+!.env.example
+node_modules/
+*.tar.gz
+*.zip
+*.log
