@@ -16,7 +16,7 @@ export function validAttempt(a) {
 }
 // Old answers must never be interpreted against replacement questions with reused IDs.
 export function upgradeAttempt(a) {
-  if(!['2026-11-02.1','2026-11-02.2'].includes(a?.version) || !validAttempt({...a,version:VERSION}))return a;
+  if(!['2026-11-02.1','2026-11-02.2','2026-11-02.3'].includes(a?.version) || !validAttempt({...a,version:VERSION}))return a;
   return {...createAttempt(a.name,a.startedAt),bankUpdated:true};
 }
 export function score(a) {return a.items.filter(i=>i.answer===0).length;}
