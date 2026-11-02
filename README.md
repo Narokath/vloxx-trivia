@@ -1,10 +1,10 @@
 # Vloxx Mechanics Check
 
-Source repository: **private** `Narokath/vloxx-trivia`. The user authorizes a publicly playable GitHub Pages site while keeping the repository private. Never change repository visibility to public. No ChatGPT Sites deployment is authorized.
+Source repository: https://github.com/Narokath/vloxx-trivia . GitHub rejected Pages from a private repository on the account's current plan, so the user explicitly authorized making this repository public and publishing through GitHub Pages. No ChatGPT Sites deployment is authorized.
 
-The Pages workflow runs the quiz checks, then uploads only `dist/`. Tests, documentation and repository history are not included in the website. As with any browser game, visitors can inspect the delivered HTML, CSS, JavaScript and question data; a private repository does not conceal those deployed files. GitHub Pages publishing from a private personal repository requires GitHub Pro or a qualifying higher plan. No paid upgrade is performed by this project.
+The Pages workflow runs the quiz checks, then uploads only `dist/`. Tests, documentation and repository history are not included in the website artifact, but are visible in the public repository. Visitors can inspect the delivered HTML, CSS, JavaScript and question data.
 
-GitHub rejected Pages activation for this repository on the account's current plan. The workflow is manual-only until hosting eligibility is resolved, so ordinary source pushes do not trigger failing deployments. After Pages is enabled with GitHub Actions as its source, run **Publish Vloxx trivia** from the Actions tab. Automatic deployment on pushes to `main` can then be enabled.
+The **Publish Vloxx trivia** workflow deploys pushes to `main` automatically and can also be run manually from the Actions tab. Pages uses GitHub Actions as its publishing source.
 
 Double-click `../Start-Trivia.cmd`, then open http://127.0.0.1:4173. Keep the terminal window open while playing; press Ctrl+C to stop. Alternatively, run `node server.js` from this folder. Run `node --test test/engine.test.js` for quiz-engine checks. The game is in `dist/` and needs no build or dependencies. The server listens only on `127.0.0.1`, not your network interfaces. Fonts and images load locally; guide links only open an external website when clicked.
 

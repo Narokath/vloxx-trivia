@@ -1,7 +1,8 @@
 name: Publish Vloxx trivia
 
 on:
-  # Enable push-to-main deployment once private-repository Pages is available.
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -15,7 +16,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out private source
+      - name: Check out source
         uses: actions/checkout@v6
       - name: Set up Node.js
         uses: actions/setup-node@v6
